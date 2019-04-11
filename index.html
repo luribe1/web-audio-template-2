@@ -14,7 +14,9 @@
 
 <main>
   <h2>Click the buttons to make (or stop) some sound:</h2>
-  <button id="playButton" class="btn-transport" type="button">play</button>
+  <button id="piano1Button" class="btn-transport" type="button">play</button>
+  <button id="piano2Button" class="btn-transport" type="button">play</button>
+  <button id="piano3Button" class="btn-transport" type="button">play</button>
   <button id="stopButton" class="btn-transport" type="button">stop</button>
   <button id="transportButton" class="btn-transport" type="button">start or stop transport</button>
   <fieldset>
@@ -47,7 +49,9 @@ var synth = new Tone.Synth({
 // Sample code to load a sound file
 // NOTE: This sound file is not played in this script
 var clave = new Tone.Player('audio/clave.mp3').toMaster();
-
+var piano1 = new Tone.Player('audio/Piano1.mp3').toMaster();
+var piano2 = new Tone.Player('audio/Piano2.mp3').toMaster();
+var piano3 = new Tone.Player('audio/Piano3.mp3').toMaster();
 var audio_file1 = new Tone.Player('audio/Audio-1_04.wav').connect(pitchShift);
 
 // Bind slider value to pitch shift amount
@@ -62,7 +66,7 @@ pitchShiftSlider.addEventListener('input', function() {
   // update slider label
   pitchShiftLabel.innerHTML = pitchShiftSlider.value;
 });
- 
+
 //create a loop
 var loop = new Tone.Loop(function(time) {
 	synth.triggerAttackRelease("C1", "8n", time);
@@ -80,22 +84,49 @@ Tone.context.resume();
   Tone.Transport.toggle();
 };
 
-// The following block of code will run when the play button is clicked
-document.querySelector('#playButton').onclick = function() {
-  console.log('The play button has been clicked.');
+// The following block of code will run when the Piano1 button is clicked
+document.querySelector('#piano1Button').onclick = function() {
+  console.log('The Piano1 button has been clicked.');
 //Start the loop
-  loop.start(0);
+  //loop.start(0);
   // Play a middle C, which will sound until the stop button is clicked
   //synth.triggerAttack('C4');
+  piano1.volume.value = -5;
+  piano1.start();
+};
+
+// The following block of code will run when the Piano2 button is clicked
+document.querySelector('#piano2Button').onclick = function() {
+  console.log('The Piano2 button has been clicked.');
+//Start the loop
+  //loop.start(0);
+  // Play a middle C, which will sound until the stop button is clicked
+  //synth.triggerAttack('C4');
+  piano2.volume.value = -5;
+  piano2.start();
+};
+
+// The following block of code will run when the Piano3 button is clicked
+document.querySelector('#piano3Button').onclick = function() {
+  console.log('The Piano3 button has been clicked.');
+//Start the loop
+  //loop.start(0);
+  // Play a middle C, which will sound until the stop button is clicked
+  //synth.triggerAttack('C4');
+  piano3.volume.value = -5;
+  piano3.start();
 };
 
 // The following block of code will run when the stop button is clicked
 document.querySelector('#stopButton').onclick = function() {
   console.log('The stop button has been clicked.');
 //Stop the loop
-  loop.stop()
+  //loop.stop()
   // Stop the note from sounding
   //synth.triggerRelease();
+  piano1.stop();
+  piano2.stop();
+  piano3.stop();
 };
 
 </script>
